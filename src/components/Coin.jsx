@@ -22,20 +22,20 @@ const Coin = ({ result = 'heads', isFlipping = false, pendingResult = null, onFl
       // Immediate fast spin — no waiting for voice result
       controls.start({
         rotateY: [0, 3600],
-        y: [0, -70],
-        scale: [1, 1.1],
+        y: [0, -50],
+        scale: [1, 1.05],
         transition: {
           rotateY: {
-            duration: 3,
+            duration: 2.5,
             ease: 'linear',
             repeat: Infinity,
           },
           y: {
-            duration: 0.4,
+            duration: 0.35,
             ease: 'easeOut',
           },
           scale: {
-            duration: 0.4,
+            duration: 0.35,
             ease: 'easeOut',
           },
         },
@@ -98,11 +98,11 @@ const Coin = ({ result = 'heads', isFlipping = false, pendingResult = null, onFl
 
   return (
     <div
-      className="flex items-center justify-center my-6 sm:my-8 md:my-10"
+      className="flex items-center justify-center my-3 sm:my-5 w-full"
       style={{ perspective: '1200px' }}
     >
       <motion.div
-        className={`relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 ${
+        className={`relative w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 ${
           !isFlipping ? 'cursor-pointer' : 'cursor-default'
         }`}
         animate={controls}
@@ -118,32 +118,33 @@ const Coin = ({ result = 'heads', isFlipping = false, pendingResult = null, onFl
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
-            background: 'linear-gradient(145deg, #ec2891 0%, #d6196f 50%, #c4166e 100%)',
+            background: 'linear-gradient(135deg, #ff2a85 0%, #d6196f 50%, #900d48 100%)',
             boxShadow: `
-              0 10px 50px rgba(233, 30, 140, 0.35),
-              0 4px 20px rgba(233, 30, 140, 0.2),
-              inset 0 2px 0 rgba(255, 255, 255, 0.2),
-              inset 0 -2px 4px rgba(0, 0, 0, 0.1)
+              0 12px 40px rgba(255, 42, 133, 0.35),
+              0 4px 12px rgba(255, 42, 133, 0.2),
+              inset 0 2px 4px rgba(255, 255, 255, 0.4),
+              inset 0 -4px 10px rgba(0, 0, 0, 0.4)
             `,
+            border: '2px solid rgba(255, 255, 255, 0.15)',
           }}
         >
           <div
             className="absolute rounded-full"
             style={{
-              width: 'calc(100% - 26px)',
-              height: 'calc(100% - 26px)',
-              border: '2.5px dotted rgba(255, 255, 255, 0.4)',
+              width: 'calc(100% - 18px)',
+              height: 'calc(100% - 18px)',
+              border: '2px dashed rgba(255, 255, 255, 0.25)',
             }}
           />
           <div
             className="absolute inset-0 rounded-full"
             style={{
-              background: 'radial-gradient(ellipse at 35% 30%, rgba(255,255,255,0.15) 0%, transparent 60%)',
+              background: 'radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 60%)',
             }}
           />
           <span
-            className="text-white font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-wider select-none z-10"
-            style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)', letterSpacing: '4px' }}
+            className="text-white font-black text-2xl sm:text-3xl md:text-4xl tracking-wider select-none z-10"
+            style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.4)', letterSpacing: '4px' }}
           >
             HEADS
           </span>
@@ -156,32 +157,33 @@ const Coin = ({ result = 'heads', isFlipping = false, pendingResult = null, onFl
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
-            background: 'linear-gradient(145deg, #1e1e36 0%, #141428 50%, #0d0d1a 100%)',
+            background: 'linear-gradient(135deg, #2a2d54 0%, #131427 50%, #060710 100%)',
             boxShadow: `
-              0 10px 50px rgba(0, 0, 0, 0.45),
-              0 4px 20px rgba(0, 0, 0, 0.3),
-              inset 0 2px 0 rgba(255, 255, 255, 0.06),
-              inset 0 -2px 4px rgba(0, 0, 0, 0.3)
+              0 12px 40px rgba(0, 0, 0, 0.6),
+              0 4px 12px rgba(0, 0, 0, 0.4),
+              inset 0 2px 4px rgba(255, 255, 255, 0.1),
+              inset 0 -4px 10px rgba(0, 0, 0, 0.6)
             `,
+            border: '2px solid rgba(255, 255, 255, 0.05)',
           }}
         >
           <div
             className="absolute rounded-full"
             style={{
-              width: 'calc(100% - 26px)',
-              height: 'calc(100% - 26px)',
-              border: '2.5px dotted rgba(255, 255, 255, 0.3)',
+              width: 'calc(100% - 18px)',
+              height: 'calc(100% - 18px)',
+              border: '2px dashed rgba(255, 255, 255, 0.15)',
             }}
           />
           <div
             className="absolute inset-0 rounded-full"
             style={{
-              background: 'radial-gradient(ellipse at 35% 30%, rgba(255,255,255,0.06) 0%, transparent 60%)',
+              background: 'radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.08) 0%, transparent 60%)',
             }}
           />
           <span
-            className="text-white font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-wider select-none z-10"
-            style={{ textShadow: '0 2px 10px rgba(0,0,0,0.4)', letterSpacing: '4px' }}
+            className="text-white font-black text-2xl sm:text-3xl md:text-4xl tracking-wider select-none z-10"
+            style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.6)', letterSpacing: '4px' }}
           >
             TAILS
           </span>

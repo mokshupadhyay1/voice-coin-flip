@@ -11,30 +11,33 @@ import { motion } from 'framer-motion';
  */
 const ScoreBoard = ({ heads = 0, tails = 0 }) => {
   return (
-    <div className="flex items-center justify-center gap-6 sm:gap-8 text-base sm:text-lg" id="scoreboard">
+    <div 
+      className="flex items-center justify-center gap-4 text-sm sm:text-base w-full" 
+      id="scoreboard"
+    >
       {/* Heads counter */}
-      <div className="flex items-center gap-1.5">
-        <span className="font-semibold text-gray-600">Heads:</span>
+      <div className="flex items-center justify-between gap-3 px-4 py-2 rounded-full glass-pill flex-1 max-w-[150px]">
+        <span className="font-medium text-gray-400">Heads</span>
         <motion.span
           key={`heads-${heads}`}
-          initial={{ scale: 1.4, color: '#e91e8c' }}
-          animate={{ scale: 1, color: '#1a1a2e' }}
+          initial={{ scale: 1.4, color: '#ff2a85' }}
+          animate={{ scale: 1, color: '#ffffff' }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="font-bold text-gray-800"
+          className="font-bold"
         >
           {heads}
         </motion.span>
       </div>
 
       {/* Tails counter */}
-      <div className="flex items-center gap-1.5">
-        <span className="font-semibold text-gray-600">Tails:</span>
+      <div className="flex items-center justify-between gap-3 px-4 py-2 rounded-full glass-pill flex-1 max-w-[150px]">
+        <span className="font-medium text-gray-400">Tails</span>
         <motion.span
           key={`tails-${tails}`}
-          initial={{ scale: 1.4, color: '#e91e8c' }}
-          animate={{ scale: 1, color: '#1a1a2e' }}
+          initial={{ scale: 1.4, color: '#6366f1' }}
+          animate={{ scale: 1, color: '#ffffff' }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="font-bold text-gray-800"
+          className="font-bold"
         >
           {tails}
         </motion.span>

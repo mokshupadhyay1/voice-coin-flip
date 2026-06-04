@@ -37,7 +37,7 @@ function App() {
 
     setIsFlipping(true);
 
-    // Start voice recognition (runs in background, max 3 seconds)
+    // Start voice recognition (runs in background, max 4 seconds)
     const detectedCall = await startListening();
 
     // Determine the result (INVERTED logic — the core trick!)
@@ -88,51 +88,49 @@ function App() {
   }, [isFlipping, handleFlip]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start pt-8 sm:pt-12 md:pt-16 px-4 pb-8">
-      {/* Header */}
-      <motion.header
-        className="flex flex-col items-center gap-3 mb-6 sm:mb-8"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-      >
-        {/* Coin icon */}
-        <div
-          className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center shadow-md"
-          style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.08)' }}
-        >
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="12" cy="14" rx="9" ry="5" stroke="#2d3047" strokeWidth="1.8" fill="none" />
-            <ellipse cx="12" cy="10" rx="9" ry="5" stroke="#2d3047" strokeWidth="1.8" fill="none" />
-            <line x1="3" y1="10" x2="3" y2="14" stroke="#2d3047" strokeWidth="1.8" />
-            <line x1="21" y1="10" x2="21" y2="14" stroke="#2d3047" strokeWidth="1.8" />
-            <line x1="7" y1="6" x2="7" y2="6.5" stroke="#2d3047" strokeWidth="1.2" />
-            <line x1="9" y1="5.5" x2="9" y2="6" stroke="#2d3047" strokeWidth="1.2" />
-            <line x1="11" y1="5.2" x2="11" y2="5.7" stroke="#2d3047" strokeWidth="1.2" />
-            <line x1="13" y1="5.2" x2="13" y2="5.7" stroke="#2d3047" strokeWidth="1.2" />
-            <line x1="15" y1="5.5" x2="15" y2="6" stroke="#2d3047" strokeWidth="1.2" />
-            <line x1="17" y1="6" x2="17" y2="6.5" stroke="#2d3047" strokeWidth="1.2" />
-          </svg>
-        </div>
+    <div className="relative min-h-screen w-full flex flex-col items-center justify-center p-4 md:p-6 overflow-hidden">
+      {/* Background ambient glows */}
+      <div className="accent-glow top-[-50px] left-[10%] sm:left-[25%]" />
+      <div className="accent-glow bottom-[-50px] right-[10%] sm:right-[25%] opacity-50" />
 
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-800 tracking-tight">
-          Heads or Tails
-        </h1>
-
-        <p className="text-sm sm:text-base text-gray-400 font-normal">
-          Flip a virtual coin with this online and free app.
-        </p>
-      </motion.header>
-
-      {/* Main Content */}
+      {/* Main card container */}
       <motion.main
-        className="flex flex-col items-center w-full max-w-lg"
-        initial={{ opacity: 0, y: 20 }}
+        className="glass-panel w-full max-w-md rounded-[32px] p-6 pb-8 sm:p-8 sm:pb-10 flex flex-col items-center gap-6 z-10"
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+        transition={{ duration: 0.8, cubicBezier: [0.16, 1, 0.3, 1] }}
       >
+        {/* Header */}
+        <motion.header
+          className="flex flex-col items-center gap-3 w-full"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {/* Coin icon container */}
+          <div className="w-12 h-12 rounded-2xl glass-pill flex items-center justify-center shadow-lg">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="12" cy="14" rx="9" ry="5" stroke="#ff2a85" strokeWidth="1.8" fill="none" />
+              <ellipse cx="12" cy="10" rx="9" ry="5" stroke="#ff2a85" strokeWidth="1.8" fill="none" />
+              <line x1="3" y1="10" x2="3" y2="14" stroke="#ff2a85" strokeWidth="1.8" />
+              <line x1="21" y1="10" x2="21" y2="14" stroke="#ff2a85" strokeWidth="1.8" />
+            </svg>
+          </div>
+
+          <div className="text-center">
+            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+              Heads or Tails
+            </h1>
+            <p className="text-xs sm:text-sm text-gray-400 mt-1 max-w-[280px] mx-auto">
+              Flip a virtual coin with this online and free app.
+            </p>
+          </div>
+        </motion.header>
+
+        {/* Score Board */}
         <ScoreBoard heads={scores.heads} tails={scores.tails} />
 
+        {/* Coin Component */}
         <Coin
           result={result}
           isFlipping={isFlipping}
@@ -141,6 +139,7 @@ function App() {
           onAnimationComplete={handleAnimationComplete}
         />
 
+        {/* Action Button */}
         <FlipButton onClick={handleFlip} disabled={isFlipping} />
       </motion.main>
     </div>
